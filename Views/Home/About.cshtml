@@ -1,0 +1,115 @@
+@{
+    ViewData["Title"] = "About";
+}
+
+<section class="page-header">
+    <span class="hero-badge">
+        <i class="bi bi-info-circle"></i>
+        About the project
+    </span>
+
+    <h1>
+        A smarter way to order photo prints
+    </h1>
+
+    <p>
+        MyImage is an ASP.NET Core MVC project that brings customer
+        registration, photo uploads, print-size selection, price calculation
+        and order processing into one simple system.
+    </p>
+</section>
+
+<section class="about-story">
+    <div class="story-panel">
+        <span class="section-eyebrow">
+            Our purpose
+        </span>
+
+        <h2>
+            Print your photographs without visiting a shop
+        </h2>
+
+        <p>
+            Customers can create an account, upload multiple photos,
+            select sizes and quantities, review the total price and
+            submit a purchase request online.
+        </p>
+
+        <p>
+            Administrators can manage print sizes, review customer orders
+            and update each request from New to Printing or Shipped.
+        </p>
+
+        <a asp-controller="Account"
+           asp-action="Register"
+           class="btn btn-primary mt-2">
+            Create an Account
+        </a>
+    </div>
+
+    <div class="about-visual">
+        <div class="about-frame">
+            <i class="bi bi-camera2"></i>
+            <span>Memories worth printing</span>
+        </div>
+    </div>
+</section>
+
+<section class="mb-5">
+    <div class="section-heading centered">
+        <span class="section-eyebrow">
+            What MyImage offers
+        </span>
+
+        <h2>
+            Everything needed for a simple printing order
+        </h2>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <article class="value-card">
+                <span class="value-icon">
+                    <i class="bi bi-person-check"></i>
+                </span>
+
+                <h3>Customer accounts</h3>
+
+                <p class="mb-0">
+                    Registration and login keep each customer's orders
+                    connected to the correct account.
+                </p>
+            </article>
+        </div>
+
+        <div class="col-md-4">
+            <article class="value-card">
+                <span class="value-icon">
+                    <i class="bi bi-images"></i>
+                </span>
+
+                <h3>Photo selection</h3>
+
+                <p class="mb-0">
+                    Upload multiple images and select a print size
+                    and quantity for every photograph.
+                </p>
+            </article>
+        </div>
+
+        <div class="col-md-4">
+            <article class="value-card">
+                <span class="value-icon">
+                    <i class="bi bi-box-seam"></i>
+                </span>
+
+                <h3>Order management</h3>
+
+                <p class="mb-0">
+                    Automatic purchase numbers, total-price calculation
+                    and administrator status updates.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,80 @@
+@model Order
+
+@{
+    ViewData["Title"] = "Confirmation";
+}
+
+<section class="py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card text-center">
+                <div class="card-body p-4 p-lg-5">
+                    @if (Model == null)
+                    {
+                        <div class="alert alert-danger">
+                            Order information could not be loaded.
+                        </div>
+
+                        <a asp-controller="Home"
+                           asp-action="Index"
+                           class="btn btn-primary">
+                            Return Home
+                        </a>
+                    }
+                    else
+                    {
+                        <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-4"
+                             style="width:95px;height:95px;background:rgba(22,163,74,.12);color:#16a34a;font-size:3rem;">
+                            ✓
+                        </div>
+
+                        <span class="hero-badge">Purchase Request Created</span>
+                        <h1 class="mt-2">Order Confirmed</h1>
+
+                        <p class="text-muted">
+                            Your order was submitted successfully. Save the purchase
+                            order number shown below.
+                        </p>
+
+                        <div class="p-4 my-4 rounded-4"
+                             style="background:#f8fafc;border:1px solid #e5e7eb;">
+                            <small class="text-muted d-block">Purchase Order Number</small>
+                            <strong class="display-5 text-primary">
+                                #@Model.OrderId.ToString("D4")
+                            </strong>
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <div class="p-3 rounded-4"
+                                     style="background:#f8fafc;">
+                                    <small class="text-muted d-block">Order Total</small>
+                                    <strong>Rs. @Model.TotalAmount.ToString("N2")</strong>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="p-3 rounded-4"
+                                     style="background:#f8fafc;">
+                                    <small class="text-muted d-block">Current Status</small>
+                                    <strong>@Model.Status</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a asp-action="MyOrders"
+                           class="btn btn-primary btn-lg">
+                            View My Orders
+                        </a>
+
+                        <a asp-controller="Home"
+                           asp-action="Index"
+                           class="btn btn-outline-primary btn-lg ms-2">
+                            Go to Home
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

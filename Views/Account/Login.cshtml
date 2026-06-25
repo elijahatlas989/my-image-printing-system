@@ -1,0 +1,128 @@
+@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<section class="auth-shell">
+    <div class="auth-showcase">
+        <div>
+            <span class="section-eyebrow">
+                Welcome back
+            </span>
+
+            <h2 class="mt-3">
+                Your printed memories are one login away.
+            </h2>
+
+            <p>
+                Access your customer account, upload photos,
+                review orders or open the administrator dashboard.
+            </p>
+        </div>
+
+        <div class="auth-photo-stack">
+            <div class="mini-print">
+                <i class="bi bi-mountains"></i>
+            </div>
+
+            <div class="mini-print">
+                <i class="bi bi-heart-fill"></i>
+            </div>
+
+            <div class="mini-print">
+                <i class="bi bi-camera-fill"></i>
+            </div>
+        </div>
+
+        <div>
+            <div class="auth-feature">
+                <i class="bi bi-check2"></i>
+                Secure customer access
+            </div>
+
+            <div class="auth-feature">
+                <i class="bi bi-check2"></i>
+                Simple photo-order workflow
+            </div>
+
+            <div class="auth-feature">
+                <i class="bi bi-check2"></i>
+                Order history and status
+            </div>
+        </div>
+    </div>
+
+    <div class="auth-form-panel">
+        <span class="section-eyebrow">
+            Account login
+        </span>
+
+        <h1 class="mt-3">
+            Sign in to MyImage
+        </h1>
+
+        <p>
+            Enter your username and password to continue.
+        </p>
+
+        <form asp-action="Login" method="post">
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger">
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Username"
+                       class="form-label">
+                </label>
+
+                <input asp-for="Username"
+                       class="form-control"
+                       placeholder="Enter your username"
+                       autocomplete="username" />
+
+                <span asp-validation-for="Username"
+                      class="text-danger small">
+                </span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Password"
+                       class="form-label">
+                </label>
+
+                <input asp-for="Password"
+                       class="form-control"
+                       placeholder="Enter your password"
+                       autocomplete="current-password" />
+
+                <span asp-validation-for="Password"
+                      class="text-danger small">
+                </span>
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary btn-lg w-100">
+                Login to Account
+                <i class="bi bi-arrow-right"></i>
+            </button>
+        </form>
+
+        <div class="text-center mt-4">
+            <span class="text-muted">
+                New to MyImage?
+            </span>
+
+            <a asp-action="Register"
+               class="fw-bold ms-1">
+                Create an account
+            </a>
+        </div>
+
+       
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

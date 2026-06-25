@@ -1,0 +1,98 @@
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<section class="page-header">
+    <span class="hero-badge">Administrator</span>
+    <h1>Admin Dashboard</h1>
+    <p>Review the main project statistics and manage customer purchase requests.</p>
+</section>
+
+<section class="pb-5">
+    <div class="row g-4">
+        <div class="col-sm-6 col-xl-3">
+            <div class="card feature-card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <p class="text-muted mb-2">Total Orders</p>
+                            <h2 class="display-6 mb-0">@(ViewBag.TotalOrders ?? 0)</h2>
+                        </div>
+                        <div class="fs-2">📦</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card feature-card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <p class="text-muted mb-2">New Orders</p>
+                            <h2 class="display-6 mb-0">@(ViewBag.NewOrders ?? 0)</h2>
+                        </div>
+                        <div class="fs-2">🆕</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card feature-card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <p class="text-muted mb-2">Customers</p>
+                            <h2 class="display-6 mb-0">@(ViewBag.Customers ?? 0)</h2>
+                        </div>
+                        <div class="fs-2">👥</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="card feature-card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <p class="text-muted mb-2">Print Sizes</p>
+                            <h2 class="display-6 mb-0">@(ViewBag.PrintSizes ?? 0)</h2>
+                        </div>
+                        <div class="fs-2">🖼️</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pb-5">
+    <div class="card">
+        <div class="card-body p-4 p-lg-5">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-8">
+                    <span class="hero-badge">Quick Actions</span>
+                    <h2>Manage the MyImage System</h2>
+                    <p class="text-muted mb-0">
+                        View purchase requests, update printing status and control
+                        the print sizes and prices stored in the database.
+                    </p>
+                </div>
+
+                <div class="col-lg-4 text-lg-end">
+                    <a asp-action="Orders"
+                       class="btn btn-primary mb-2">
+                        View Orders
+                    </a>
+
+                    <a asp-action="PrintSizes"
+                       class="btn btn-outline-primary mb-2 ms-2">
+                        Print Sizes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

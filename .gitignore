@@ -1,0 +1,35 @@
+# Visual Studio temporary files
+.vs/
+bin/
+obj/
+
+# User-specific Visual Studio files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build output
+Debug/
+Release/
+x64/
+x86/
+
+# Uploaded customer images
+wwwroot/uploads/
+
+# Local database files
+*.mdf
+*.ldf
+*.db
+
+# Logs
+logs/
+*.log
+
+# Secrets and local configuration
+appsettings.Development.json
+
+# Operating system files
+Thumbs.db
+.DS_Store

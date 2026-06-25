@@ -1,0 +1,125 @@
+@model PaymentViewModel
+
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<section class="page-header">
+    <span class="hero-badge">
+        Final Step
+    </span>
+
+    <h1>Payment and delivery</h1>
+
+    <p>
+        Select the payment method and enter the shipping address.
+    </p>
+</section>
+
+<section class="pb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body p-4 p-lg-5">
+
+                    <div class="alert alert-danger">
+                        Demo project only. Do not enter a real bank-card number.
+                    </div>
+
+                    <form asp-action="Payment"
+                          method="post">
+                        <input asp-for="OrderId"
+                               type="hidden" />
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="alert alert-danger">
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PaymentMethod"
+                                   class="form-label">
+                            </label>
+
+                            <select asp-for="PaymentMethod"
+                                    class="form-select"
+                                    id="paymentMethod">
+                                <option value="Credit Card">
+                                    Credit Card
+                                </option>
+
+                                <option value="Direct Payment">
+                                    Direct Payment at Branch
+                                </option>
+                            </select>
+
+                            <span asp-validation-for="PaymentMethod"
+                                  class="text-danger small">
+                            </span>
+                        </div>
+
+                        <div class="mb-3"
+                             id="cardSection">
+                            <label asp-for="CardNumber"
+                                   class="form-label">
+                            </label>
+
+                            <input asp-for="CardNumber"
+                                   class="form-control"
+                                   inputmode="numeric"
+                                   placeholder="Enter any 16-digit demo number" />
+
+                            <span asp-validation-for="CardNumber"
+                                  class="text-danger small">
+                            </span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="ShippingAddress"
+                                   class="form-label">
+                            </label>
+
+                            <textarea asp-for="ShippingAddress"
+                                      class="form-control"
+                                      rows="4"
+                                      placeholder="Enter the complete delivery address">
+                            </textarea>
+
+                            <span asp-validation-for="ShippingAddress"
+                                  class="text-danger small">
+                            </span>
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-primary btn-lg w-100">
+                            Confirm Order
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        const paymentMethod = document.getElementById("paymentMethod");
+        const cardSection = document.getElementById("cardSection");
+
+        function updateCardSection() {
+            const isCard =
+                paymentMethod.value === "Credit Card";
+
+            cardSection.style.display =
+                isCard ? "block" : "none";
+        }
+
+        paymentMethod.addEventListener(
+            "change",
+            updateCardSection
+        );
+
+        updateCardSection();
+    </script>
+}

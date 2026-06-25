@@ -1,0 +1,368 @@
+@{
+    var role = Context.Session.GetString("Role");
+    var displayName = Context.Session.GetString("DisplayName");
+    var pageTitle = ViewData["Title"]?.ToString() ?? "Home";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@pageTitle - MyImage</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+          rel="stylesheet" />
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+</head>
+
+<body>
+    <div class="site-glow site-glow-one"></div>
+    <div class="site-glow site-glow-two"></div>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-xxl">
+            <a class="navbar-brand"
+               asp-controller="Home"
+               asp-action="Index">
+                <span class="brand-mark">
+                    <i class="bi bi-images"></i>
+                </span>
+
+                <span class="brand-name">
+                    My<span>Image</span>
+                </span>
+            </a>
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#mainNav"
+                    aria-controls="mainNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse"
+                 id="mainNav">
+                <ul class="navbar-nav mx-lg-auto">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           asp-controller="Home"
+                           asp-action="Index">
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           asp-controller="Home"
+                           asp-action="About">
+                            About
+                        </a>
+                    </li>
+
+                    @if (role == "Customer")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Order"
+                               asp-action="UploadPhotos">
+                                New Order
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Order"
+                               asp-action="MyOrders">
+                                My Orders
+                            </a>
+                        </li>
+                    }
+
+                    @if (role == "Admin")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Admin"
+                               asp-action="Dashboard">
+                                Dashboard
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Admin"
+                               asp-action="Orders">
+                                Orders
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Admin"
+                               asp-action="PrintSizes">
+                                Print Sizes
+                            </a>
+                        </li>
+                    }
+                </ul>
+
+                <div class="nav-actions">
+                    @if (string.IsNullOrEmpty(role))
+                    {
+                        <a class="nav-signup"
+                           asp-controller="Account"
+                           asp-action="Register">
+                            Register
+                        </a>
+
+                        <a class="btn btn-primary nav-login"
+                           asp-controller="Account"
+                           asp-action="Login">
+                            Login
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <div class="user-chip">
+                            <span class="user-avatar">
+                                @(string.IsNullOrWhiteSpace(displayName)
+                                    ? "U"
+                                    : displayName.Substring(0, 1).ToUpper())
+                            </span>
+
+                            <span>
+                                <small>Welcome</small>
+                                <strong>@displayName</strong>
+                            </span>
+                        </div>
+
+                        <a class="btn btn-outline-primary"
+                           asp-controller="Account"
+                           asp-action="Logout">
+                            Logout
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="site-main">
+        <div class="container-xxl">
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success global-alert">
+                    <i class="bi bi-check-circle-fill"></i>
+                    @TempData["Success"]
+                </div>
+            }
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger global-alert">
+                    <i class="bi bi-exclamation-circle-fill"></i>
+                    @TempData["Error"]
+                </div>
+            }
+
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-accent"></div>
+
+        <div class="container-xxl">
+            <div class="footer-main">
+                <div class="footer-about">
+                    <a class="footer-brand"
+                       asp-controller="Home"
+                       asp-action="Index">
+                        <span class="brand-mark">
+                            <i class="bi bi-images"></i>
+                        </span>
+
+                        <span>
+                            My<span>Image</span>
+                        </span>
+                    </a>
+
+                    <p>
+                        Upload your favourite photographs, select the
+                        perfect print size and place your order online
+                        through one simple and secure system.
+                    </p>
+
+                    <div class="footer-features">
+                        <span>
+                            <i class="bi bi-check-circle-fill"></i>
+                            Easy Upload
+                        </span>
+
+                        <span>
+                            <i class="bi bi-check-circle-fill"></i>
+                            Flexible Sizes
+                        </span>
+
+                        <span>
+                            <i class="bi bi-check-circle-fill"></i>
+                            Order Tracking
+                        </span>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+
+                    <a asp-controller="Home"
+                       asp-action="Index">
+                        <i class="bi bi-chevron-right"></i>
+                        Home
+                    </a>
+
+                    <a asp-controller="Home"
+                       asp-action="About">
+                        <i class="bi bi-chevron-right"></i>
+                        About
+                    </a>
+
+                    @if (role == "Customer")
+                    {
+                        <a asp-controller="Order"
+                           asp-action="UploadPhotos">
+                            <i class="bi bi-chevron-right"></i>
+                            New Order
+                        </a>
+
+                        <a asp-controller="Order"
+                           asp-action="MyOrders">
+                            <i class="bi bi-chevron-right"></i>
+                            My Orders
+                        </a>
+                    }
+                    else if (role == "Admin")
+                    {
+                        <a asp-controller="Admin"
+                           asp-action="Dashboard">
+                            <i class="bi bi-chevron-right"></i>
+                            Dashboard
+                        </a>
+
+                        <a asp-controller="Admin"
+                           asp-action="Orders">
+                            <i class="bi bi-chevron-right"></i>
+                            Manage Orders
+                        </a>
+                    }
+                </div>
+
+                <div class="footer-column">
+                    <h3>Account</h3>
+
+                    @if (string.IsNullOrEmpty(role))
+                    {
+                        <a asp-controller="Account"
+                           asp-action="Register">
+                            <i class="bi bi-chevron-right"></i>
+                            Register
+                        </a>
+
+                        <a asp-controller="Account"
+                           asp-action="Login">
+                            <i class="bi bi-chevron-right"></i>
+                            Login
+                        </a>
+                    }
+                    else
+                    {
+                        <div class="footer-user">
+                            <span class="footer-user-icon">
+                                <i class="bi bi-person-fill"></i>
+                            </span>
+
+                            <span>
+                                <small>Signed in as</small>
+                                <strong>@displayName</strong>
+                            </span>
+                        </div>
+
+                        <a asp-controller="Account"
+                           asp-action="Logout">
+                            <i class="bi bi-chevron-right"></i>
+                            Logout
+                        </a>
+                    }
+                </div>
+
+                <div class="footer-column">
+                    <h3>System</h3>
+
+                    <div class="footer-info">
+                        <i class="bi bi-shield-check"></i>
+
+                        <span>
+                            <strong>Secure Accounts</strong>
+                            <small>Protected customer access</small>
+                        </span>
+                    </div>
+
+                    <div class="footer-info">
+                        <i class="bi bi-calculator"></i>
+
+                        <span>
+                            <strong>Automatic Pricing</strong>
+                            <small>Size and quantity calculation</small>
+                        </span>
+                    </div>
+
+                    <div class="footer-info">
+                        <i class="bi bi-truck"></i>
+
+                        <span>
+                            <strong>Order Status</strong>
+                            <small>New, Printing and Shipped</small>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>
+                    © @DateTime.Now.Year MyImage Photo Printing.
+                    All rights reserved.
+                </span>
+
+                <span>
+                    Built with ASP.NET Core MVC &amp; SQL Server
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <script src="~/js/site.js"
+            asp-append-version="true">
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

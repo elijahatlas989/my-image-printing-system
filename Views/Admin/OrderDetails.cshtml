@@ -1,0 +1,157 @@
+@model Order
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+@if (Model == null)
+{
+    <div class="alert alert-danger mt-5">
+        The requested order could not be found.
+    </div>
+}
+else
+{
+    <section class="page-header">
+        <span class="hero-badge">Administrator</span>
+        <h1>Order #@Model.OrderId.ToString("D4")</h1>
+        <p>Review the customer, payment, printing and delivery information.</p>
+    </section>
+
+    <section class="pb-5">
+        <div class="row g-4 mb-4">
+            <div class="col-lg-7">
+                <div class="card h-100">
+                    <div class="card-body p-4">
+                        <h2 class="h4 mb-4">Customer Information</h2>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <small class="text-muted d-block">Customer</small>
+                                <strong>
+                                    @(Model.Customer == null
+                                        ? "Not available"
+                                        : $"{Model.Customer.FirstName} {Model.Customer.LastName}")
+                                </strong>
+                            </div>
+
+                            <div class="col-md-6">
+                                <small class="text-muted d-block">Email</small>
+                                <strong>@(Model.Customer?.Email ?? "Not available")</strong>
+                            </div>
+
+                            <div class="col-12">
+                                <small class="text-muted d-block">Shipping Address</small>
+                                <strong>@(Model.ShippingAddress ?? "Not entered")</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="card h-100">
+                    <div class="card-body p-4">
+                        <h2 class="h4 mb-4">Order Information</h2>
+
+                        <p>
+                            <small class="text-muted d-block">Status</small>
+                            <strong>@Model.Status</strong>
+                        </p>
+
+                        <p>
+                            <small class="text-muted d-block">Order Total</small>
+                            <strong>Rs. @Model.TotalAmount.ToString("N2")</strong>
+                        </p>
+
+                        <p class="mb-0">
+                            <small class="text-muted d-block">Payment Method</small>
+                            <strong>@(Model.Payment?.PaymentMethod ?? "Not completed")</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body p-4">
+                <h2 class="h4 mb-4">Photo Details</h2>
+
+                @if (Model.OrderDetails == null || Model.OrderDetails.Count == 0)
+                {
+                    <p class="text-muted mb-0">No photo details are available.</p>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>Print Size</th>
+                                    <th>Quantity</th>
+                                    <th>Line Total</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model.OrderDetails)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <img src="/uploads/@Model.FolderName/@item.StoredFileName"
+                                                     alt="@item.OriginalFileName"
+                                                     style="width:64px;height:64px;object-fit:cover;border-radius:12px;" />
+                                                <span>@item.OriginalFileName</span>
+                                            </div>
+                                        </td>
+                                        <td>@(item.PrintSize?.SizeName ?? "Not selected")</td>
+                                        <td>@item.Quantity</td>
+                                        <td>Rs. @item.LineTotal.ToString("N2")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body p-4">
+                <h2 class="h4 mb-3">Update Order Status</h2>
+
+                <form asp-action="UpdateStatus"
+                      method="post"
+                      class="row g-3 align-items-end">
+                    <input type="hidden"
+                           name="orderId"
+                           value="@Model.OrderId" />
+
+                    <div class="col-md-6">
+                        <label class="form-label">Select Status</label>
+                        <select class="form-select" name="status">
+                            <option>New</option>
+                            <option>Printing</option>
+                            <option>Shipped</option>
+                            <option>Cancelled</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <button class="btn btn-primary"
+                                type="submit">
+                            Update Status
+                        </button>
+
+                        <a asp-action="Orders"
+                           class="btn btn-outline-primary ms-2">
+                            Back to Orders
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+}

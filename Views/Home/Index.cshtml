@@ -1,0 +1,241 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<section class="hero-section">
+    <div class="hero-grid">
+        <div class="hero-copy">
+            <span class="hero-badge">
+                <i class="bi bi-stars"></i>
+                Photo printing made simple
+            </span>
+
+            <h1>
+                Your favourite moments,
+                <span>beautifully printed.</span>
+            </h1>
+
+            <p>
+                Upload your digital photos, select the perfect print size,
+                choose the number of copies and place your order in a few
+                simple steps.
+            </p>
+
+            <div class="hero-actions">
+                <a asp-controller="Account"
+                   asp-action="Register"
+                   class="btn btn-primary btn-lg">
+                    Start Printing
+                    <i class="bi bi-arrow-up-right"></i>
+                </a>
+
+                <a asp-controller="Account"
+                   asp-action="Login"
+                   class="btn btn-outline-primary btn-lg">
+                    Customer Login
+                </a>
+            </div>
+
+            <div class="hero-trust">
+                <div class="trust-item">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Multiple photo uploads
+                </div>
+
+                <div class="trust-item">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Flexible print sizes
+                </div>
+
+                <div class="trust-item">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Simple order tracking
+                </div>
+            </div>
+        </div>
+
+        <div class="photo-board">
+            <div class="floating-pill floating-pill-one">
+                <i class="bi bi-lightning-charge-fill"></i>
+                Fast online ordering
+            </div>
+
+            <div class="floating-pill floating-pill-two">
+                <i class="bi bi-shield-check"></i>
+                Secure customer account
+            </div>
+
+            <div class="print-card print-card-one">
+                <div class="print-art art-one">
+                    <i class="bi bi-mountains"></i>
+                </div>
+
+                <div class="print-caption">
+                    Adventure
+                </div>
+            </div>
+
+            <div class="print-card print-card-two">
+                <div class="print-art art-two">
+                    <i class="bi bi-heart-fill"></i>
+                </div>
+
+                <div class="print-caption">
+                    Celebrations
+                </div>
+            </div>
+
+            <div class="print-card print-card-three">
+                <div class="print-art art-three">
+                    <i class="bi bi-camera-fill"></i>
+                </div>
+
+                <div class="print-caption">
+                    Everyday memories
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="metrics-strip">
+    <div class="metric">
+        <strong>6+</strong>
+        <span>Image formats</span>
+    </div>
+
+    <div class="metric">
+        <strong>4</strong>
+        <span>Popular print sizes</span>
+    </div>
+
+    <div class="metric">
+        <strong>100</strong>
+        <span>Copies per photo</span>
+    </div>
+
+    <div class="metric">
+        <strong>24/7</strong>
+        <span>Online ordering</span>
+    </div>
+</section>
+
+<section class="process-section">
+    <div class="section-heading centered">
+        <span class="section-eyebrow">
+            How it works
+        </span>
+
+        <h2>
+            From upload to order in three steps
+        </h2>
+
+        <p>
+            MyImage keeps the entire photo-printing process clear,
+            quick and easy to understand.
+        </p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <article class="process-card">
+                <span class="process-number">01</span>
+
+                <h3>Upload your photos</h3>
+
+                <p>
+                    Choose one or multiple photos directly from your computer.
+                </p>
+            </article>
+        </div>
+
+        <div class="col-md-4">
+            <article class="process-card">
+                <span class="process-number">02</span>
+
+                <h3>Select size and quantity</h3>
+
+                <p>
+                    Pick a print size and number of copies for every photograph.
+                </p>
+            </article>
+        </div>
+
+        <div class="col-md-4">
+            <article class="process-card">
+                <span class="process-number">03</span>
+
+                <h3>Confirm your order</h3>
+
+                <p>
+                    Review the total price, add delivery details and submit the order.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="print-sizes-showcase">
+    <div>
+        <span class="section-eyebrow">
+            Flexible options
+        </span>
+
+        <h2 class="mt-3">
+            Print sizes for every kind of memory
+        </h2>
+
+        <p>
+            Choose from compact everyday prints to larger display sizes.
+            Prices are controlled by the administrator and loaded from the database.
+        </p>
+
+        <a asp-controller="Account"
+           asp-action="Register"
+           class="btn btn-primary mt-2">
+            Create Your Account
+        </a>
+    </div>
+
+    <div class="size-grid">
+        <div class="size-card">
+            <strong>4 × 6</strong>
+            <span>Classic everyday print</span>
+        </div>
+
+        <div class="size-card">
+            <strong>5 × 7</strong>
+            <span>Perfect for frames</span>
+        </div>
+
+        <div class="size-card">
+            <strong>8 × 10</strong>
+            <span>Portrait display size</span>
+        </div>
+
+        <div class="size-card">
+            <strong>10 × 12</strong>
+            <span>Large premium print</span>
+        </div>
+    </div>
+</section>
+
+<section class="cta-panel">
+    <span class="section-eyebrow">
+        Preserve what matters
+    </span>
+
+    <h2 class="mt-3">
+        Ready to turn your photos into prints?
+    </h2>
+
+    <p>
+        Create an account and place your first printing order today.
+    </p>
+
+    <a asp-controller="Account"
+       asp-action="Register"
+       class="btn btn-primary btn-lg mt-2">
+        Get Started
+    </a>
+</section>

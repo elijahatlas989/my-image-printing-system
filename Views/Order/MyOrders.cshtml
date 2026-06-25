@@ -1,0 +1,79 @@
+@model IEnumerable<Order>
+
+@{
+    ViewData["Title"] = "My Orders";
+    var orders = Model?.ToList() ?? new List<Order>();
+}
+
+<section class="page-header">
+    <span class="hero-badge">Customer Account</span>
+    <h1>My Orders</h1>
+    <p>Review your submitted purchase orders and their current status.</p>
+</section>
+
+<section class="pb-5">
+    <div class="card">
+        <div class="card-body p-4">
+            @if (orders.Count == 0)
+            {
+                <div class="text-center py-5">
+                    <div class="display-3 mb-3">📭</div>
+                    <h2>No Orders Yet</h2>
+                    <p class="text-muted">
+                        Create your first order by uploading photos.
+                    </p>
+
+                    <a asp-action="UploadPhotos"
+                       class="btn btn-primary">
+                        Start New Order
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+                    <div>
+                        <h2 class="mb-1">Order History</h2>
+                        <p class="text-muted mb-0">@orders.Count order(s) found</p>
+                    </div>
+
+                    <a asp-action="UploadPhotos"
+                       class="btn btn-primary">
+                        New Order
+                    </a>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr>
+                                <th>Order No.</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var order in orders)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>#@order.OrderId.ToString("D4")</strong>
+                                    </td>
+                                    <td>@order.OrderDate.ToString("dd MMM yyyy")</td>
+                                    <td>Rs. @order.TotalAmount.ToString("N2")</td>
+                                    <td>
+                                        <span class="badge rounded-pill text-bg-primary">
+                                            @order.Status
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</section>

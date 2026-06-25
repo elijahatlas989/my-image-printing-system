@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Upload Photos";
+}
+
+<section class="page-header">
+    <span class="hero-badge">Step 1 of Your Order</span>
+    <h1>Upload Your Photos</h1>
+    <p>Select one or multiple files from your computer to begin the order.</p>
+</section>
+
+<section class="pb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body p-4 p-lg-5">
+                    <form asp-action="UploadPhotos"
+                          method="post"
+                          enctype="multipart/form-data">
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="alert alert-danger"></div>
+
+                        @if (ViewBag.Error != null)
+                        {
+                            <div class="alert alert-danger">
+                                @ViewBag.Error
+                            </div>
+                        }
+
+                        <div class="upload-box">
+                            <div class="display-3 mb-3">📤</div>
+                            <h2 class="h4">Choose Files</h2>
+                            <p class="text-muted">
+                                Click below and select one or multiple photos or files.
+                            </p>
+
+                            <input id="photoInput"
+                                   type="file"
+                                   name="photos"
+                                   class="form-control"
+                                   multiple
+                                   required />
+
+                            <div id="photoPreview"
+                                 class="row g-3 mt-3"></div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mt-4">
+                            <small class="text-muted">
+                                Uploaded files will be stored in the project uploads folder.
+                            </small>
+
+                            <button type="submit"
+                                    class="btn btn-primary btn-lg">
+                                Upload and Continue
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

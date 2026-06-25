@@ -1,0 +1,13 @@
+@* Friendly error page displayed when an unexpected problem occurs. *@
+@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+<div class="alert alert-danger">
+    <h2>Something went wrong</h2>
+    <p>Please return to the home page and try again.</p>
+    @if (Model.ShowRequestId)
+    {
+        <p><strong>Request ID:</strong> @Model.RequestId</p>
+    }
+</div>

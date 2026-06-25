@@ -1,0 +1,81 @@
+@model IEnumerable<Order>
+
+@{
+    ViewData["Title"] = "Admin Orders";
+    var orders = Model?.ToList() ?? new List<Order>();
+}
+
+<section class="page-header">
+    <span class="hero-badge">Administrator</span>
+    <h1>Purchase Requests</h1>
+    <p>Open customer orders and review their totals, dates and current status.</p>
+</section>
+
+<section class="pb-5">
+    <div class="card">
+        <div class="card-body p-4">
+            @if (orders.Count == 0)
+            {
+                <div class="text-center py-5">
+                    <div class="display-3 mb-3">📭</div>
+                    <h2>No Purchase Requests</h2>
+                    <p class="text-muted mb-0">
+                        Customer orders will appear here after they are submitted.
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+                    <div>
+                        <h2 class="mb-1">All Orders</h2>
+                        <p class="text-muted mb-0">@orders.Count purchase request(s)</p>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th class="text-end">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var order in orders)
+                            {
+                                <tr>
+                                    <td><strong>#@order.OrderId.ToString("D4")</strong></td>
+                                    <td>
+                                        @(order.Customer == null
+                                            ? "Customer"
+                                            : $"{order.Customer.FirstName} {order.Customer.LastName}")
+                                    </td>
+                                    <td>@order.OrderDate.ToString("dd MMM yyyy")</td>
+                                    <td>Rs. @order.TotalAmount.ToString("N2")</td>
+                                    <td>
+                                        <span class="badge rounded-pill text-bg-primary">
+                                            @order.Status
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <a asp-action="OrderDetails"
+                                           asp-route-id="@order.OrderId"
+                                           class="btn btn-sm btn-outline-primary">
+                                            Open Order
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</section>

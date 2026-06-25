@@ -1,0 +1,243 @@
+@model RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<section class="auth-shell">
+    <div class="auth-showcase">
+        <div>
+            <span class="section-eyebrow">
+                New customer
+            </span>
+
+            <h2 class="mt-3">
+                Create an account and start printing.
+            </h2>
+
+            <p>
+                One account gives you access to photo uploads,
+                size selection, price calculation and order history.
+            </p>
+        </div>
+
+        <div class="auth-photo-stack">
+            <div class="mini-print">
+                <i class="bi bi-image"></i>
+            </div>
+
+            <div class="mini-print">
+                <i class="bi bi-stars"></i>
+            </div>
+
+            <div class="mini-print">
+                <i class="bi bi-camera2"></i>
+            </div>
+        </div>
+
+        <div>
+            <div class="auth-feature">
+                <i class="bi bi-check2"></i>
+                Upload multiple photographs
+            </div>
+
+            <div class="auth-feature">
+                <i class="bi bi-check2"></i>
+                Choose sizes and quantities
+            </div>
+
+            <div class="auth-feature">
+                <i class="bi bi-check2"></i>
+                Review your order status
+            </div>
+        </div>
+    </div>
+
+    <div class="auth-form-panel">
+        <span class="section-eyebrow">
+            Registration form
+        </span>
+
+        <h1 class="mt-3">
+            Create your account
+        </h1>
+
+        <p>
+            Complete the details below to register as a customer.
+        </p>
+
+        <form asp-action="Register" method="post">
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger">
+            </div>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label asp-for="FirstName"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="FirstName"
+                           class="form-control"
+                           placeholder="First name" />
+
+                    <span asp-validation-for="FirstName"
+                          class="text-danger small">
+                    </span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="LastName"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="LastName"
+                           class="form-control"
+                           placeholder="Last name" />
+
+                    <span asp-validation-for="LastName"
+                          class="text-danger small">
+                    </span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="DOB"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="DOB"
+                           class="form-control" />
+
+                    <span asp-validation-for="DOB"
+                          class="text-danger small">
+                    </span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Gender"
+                           class="form-label">
+                    </label>
+
+                    <select asp-for="Gender"
+                            class="form-select">
+                        <option value="">Select gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+
+                    <span asp-validation-for="Gender"
+                          class="text-danger small">
+                    </span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="PhoneNo"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="PhoneNo"
+                           class="form-control"
+                           placeholder="Phone number" />
+
+                    <span asp-validation-for="PhoneNo"
+                          class="text-danger small">
+                    </span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Email"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="Email"
+                           class="form-control"
+                           placeholder="name@example.com" />
+
+                    <span asp-validation-for="Email"
+                          class="text-danger small">
+                    </span>
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="Address"
+                           class="form-label">
+                    </label>
+
+                    <textarea asp-for="Address"
+                              class="form-control"
+                              rows="3"
+                              placeholder="Complete address">
+                    </textarea>
+
+                    <span asp-validation-for="Address"
+                          class="text-danger small">
+                    </span>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="Username"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="Username"
+                           class="form-control"
+                           placeholder="Username" />
+
+                    <span asp-validation-for="Username"
+                          class="text-danger small">
+                    </span>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="Password"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="Password"
+                           class="form-control"
+                           placeholder="Password" />
+
+                    <span asp-validation-for="Password"
+                          class="text-danger small">
+                    </span>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="ConfirmPassword"
+                           class="form-label">
+                    </label>
+
+                    <input asp-for="ConfirmPassword"
+                           class="form-control"
+                           placeholder="Repeat password" />
+
+                    <span asp-validation-for="ConfirmPassword"
+                          class="text-danger small">
+                    </span>
+                </div>
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary btn-lg w-100 mt-4">
+                Create Customer Account
+                <i class="bi bi-arrow-right"></i>
+            </button>
+        </form>
+
+        <div class="text-center mt-4">
+            <span class="text-muted">
+                Already registered?
+            </span>
+
+            <a asp-action="Login"
+               class="fw-bold ms-1">
+                Login here
+            </a>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
